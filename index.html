@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronicles — Contemporary Journalism & Global Dispatches</title>
+  
+  <!-- Modern Fonts: Newsreader (Editorial Serif) & Plus Jakarta Sans (Modern Clean Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="site-wrapper">
+
+    <!-- Top Announcement / Breaking Ticker -->
+    <aside class="breaking-ticker" id="breaking-ticker">
+      <div class="container ticker-container">
+        <span class="ticker-badge">⚡ FLASH DISPATCH</span>
+        <div class="ticker-content" id="ticker-text">
+          Quantum Coherence Milestone: Researchers achieve 1,000-qubit sustained stability...
+        </div>
+        <div class="ticker-date" id="current-datetime">Oct 30, 2026</div>
+      </div>
+    </aside>
+
+    <!-- Main Header -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <!-- Left: Edition info & Search Toggle -->
+        <div class="header-meta">
+          <span class="edition-label">GLOBAL DIGITAL EDITION</span>
+          <span class="meta-separator">•</span>
+          <span class="weather-pill" id="weather-pill">🌤️ Global 22°C</span>
+        </div>
+
+        <!-- Center: Masthead / Logo -->
+        <div class="masthead">
+          <a href="#" class="brand-link" id="brand-logo">
+            <h1 class="brand-title">Chronicles</h1>
+          </a>
+          <p class="brand-tagline">Veritas • Profunditas • Tempus</p>
+        </div>
+
+        <!-- Right: Actions (Search, Bookmarks, Theme Toggle) -->
+        <div class="header-actions">
+          <button id="search-toggle-btn" class="icon-btn" aria-label="Toggle Search" title="Search Dispatches (/ or Ctrl+K)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          
+          <button id="bookmarks-btn" class="icon-btn relative" aria-label="View Saved Reading List" title="Saved Bookmarks">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            <span class="badge-count" id="bookmark-badge">0</span>
+          </button>
+
+          <button id="theme-toggle-btn" class="icon-btn" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Bar (Categories) -->
+      <nav class="nav-bar" aria-label="Main Navigation">
+        <div class="container nav-container">
+          <ul class="nav-list" id="category-nav">
+            <li><button class="nav-link active" data-category="all">All Dispatches</button></li>
+            <li><button class="nav-link" data-category="technology">Technology</button></li>
+            <li><button class="nav-link" data-category="world">World</button></li>
+            <li><button class="nav-link" data-category="business">Business</button></li>
+            <li><button class="nav-link" data-category="science">Science</button></li>
+            <li><button class="nav-link" data-category="health">Health</button></li>
+            <li><button class="nav-link" data-category="entertainment">Arts & Culture</button></li>
+            <li><button class="nav-link" data-category="sports">Sports</button></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Expandable Search Overlay / Bar -->
+      <div class="search-drawer" id="search-drawer">
+        <div class="container search-drawer-inner">
+          <div class="search-input-box">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="search-input" placeholder="Search world dispatches, analysis, technology, science..." autocomplete="off">
+            <button id="clear-search-btn" class="clear-btn" aria-label="Clear Search">&times;</button>
+          </div>
+          <span class="search-hint">Press <kbd>ESC</kbd> to close • Real-time asynchronous filter</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="main-content container">
+
+      <!-- View Title & Filter State Indicator -->
+      <div class="feed-header">
+        <div class="feed-title-wrap">
+          <h2 class="feed-title" id="current-category-title">Top Stories & Global Intelligence</h2>
+          <span class="feed-badge" id="article-count-badge">Loading...</span>
+        </div>
+        <div class="feed-controls">
+          <button id="refresh-feed-btn" class="action-link-btn" title="Fetch Latest Updates">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Live Sync</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State Skeleton -->
+      <div class="loading-state" id="loading-spinner">
+        <div class="skeleton-featured">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-text-group">
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line half"></div>
+            <div class="skeleton-line quarter"></div>
+          </div>
+        </div>
+        <div class="skeleton-grid">
+          <div class="skeleton-card"><div class="skeleton-card-img"></div><div class="skeleton-line full"></div><div class="skeleton-line half"></div></div>
+          <div class="skeleton-card"><div class="skeleton-card-img"></div><div class="skeleton-line full"></div><div class="skeleton-line half"></div></div>
+          <div class="skeleton-card"><div class="skeleton-card-img"></div><div class="skeleton-line full"></div><div class="skeleton-line half"></div></div>
+        </div>
+      </div>
+
+      <!-- Error / Empty State Notification -->
+      <div class="state-banner error-banner" id="error-banner" style="display: none;">
+        <span class="banner-icon">⚠️</span>
+        <div class="banner-body">
+          <h4 id="error-title">Unable to reach external wire</h4>
+          <p id="error-desc">Showing verified editorial archive.</p>
+        </div>
+        <button id="retry-btn" class="btn btn-sm">Try Again</button>
+      </div>
+
+      <!-- Editorial Showcase / Hero Layout -->
+      <section class="hero-section" id="hero-section">
+        <!-- Rendered dynamically by app.js: Lead Story + Sidebar Secondary Column -->
+      </section>
+
+      <!-- Standard Article Stream Grid -->
+      <section class="stream-section">
+        <div class="section-divider">
+          <span class="divider-text">LATEST DISPATCHES</span>
+        </div>
+        
+        <div class="articles-grid" id="articles-grid">
+          <!-- Populated asynchronously with modern Article Cards -->
+        </div>
+
+        <!-- Empty Results Message -->
+        <div class="empty-state" id="empty-state" style="display: none;">
+          <div class="empty-icon">📰</div>
+          <h3>No matching dispatches found</h3>
+          <p>We couldn't find any articles matching your search criteria. Try a different keyword or reset filters.</p>
+          <button id="reset-filter-btn" class="btn btn-primary">Reset to All Stories</button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Reading List / Bookmarks Drawer Modal -->
+    <div class="modal-overlay" id="bookmarks-modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            <h3>Saved Reading List</h3>
+          </div>
+          <button class="close-modal-btn" id="close-bookmarks-btn" aria-label="Close Bookmarks">&times;</button>
+        </div>
+        <div class="modal-body" id="bookmarks-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Detail Reader Modal -->
+    <div class="modal-overlay" id="reader-modal" aria-hidden="true">
+      <div class="modal-dialog modal-reader">
+        <div class="reader-header">
+          <button class="back-link-btn" id="close-reader-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Dispatches</span>
+          </button>
+          <div class="reader-actions">
+            <button id="reader-bookmark-btn" class="icon-btn" title="Bookmark Article">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+            <button id="reader-copy-link-btn" class="icon-btn" title="Copy Link Only">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            </button>
+            <button id="reader-share-btn" class="icon-btn" title="Share Article (Social / System Sheet)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            </button>
+          </div>
+        </div>
+        
+        <article class="reader-article" id="reader-content">
+          <!-- Populated dynamically by app.js -->
+        </article>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toast">Link copied to clipboard</div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <h2 class="footer-title">Chronicles</h2>
+          <p class="footer-desc">
+            Independent global reporting, analysis, and investigation. Built with Vanilla JavaScript, ES6 features, Asynchronous Fetch, and Promises.
+          </p>
+        </div>
+
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h4>Domains</h4>
+            <ul>
+              <li><a href="#" data-footer-cat="technology">Technology & AI</a></li>
+              <li><a href="#" data-footer-cat="world">World Geopolitics</a></li>
+              <li><a href="#" data-footer-cat="science">Astronomy & Physics</a></li>
+              <li><a href="#" data-footer-cat="health">Medicine & Longevity</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Code Architecture</h4>
+            <ul>
+              <li><span>ES6 Destructuring & Arrow Functions</span></li>
+              <li><span>Async/Await & Promise Pipelines</span></li>
+              <li><span>Fetch API & Error Handling</span></li>
+              <li><span>CSS Grid & Flexbox System</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Chronicles Global Media. All rights reserved.</p>
+        <p class="powered-by">Next-Gen Project • Vanilla Web Standards</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Main ES Module Application Script -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
